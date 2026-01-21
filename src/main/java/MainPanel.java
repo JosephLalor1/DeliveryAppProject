@@ -14,7 +14,7 @@ public class MainPanel extends JPanel
     {
         //private JButton clearButton, displayButton;
         private JPanel card1Container = new JPanel();
-        private int numAds = 10;
+        private int numAds = Operations.count("restaurants");
         private RestaurantAd[] ads = new RestaurantAd[numAds];
         public static void openRestaurant()
             {

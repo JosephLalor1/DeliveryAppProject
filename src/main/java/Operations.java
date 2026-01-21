@@ -117,6 +117,37 @@ public class Operations {
                         }
                 }
         }
+    public static int count(String table)
+        {
+            int outp = 0;
+            PreparedStatement pstat = null;
+            ResultSet resultSet = null;
+            try 
+                {
+                    pstat = connection.prepareStatement("SELECT COUNT(*) FROM " + table);
+                    resultSet = pstat.executeQuery();
+                    if (resultSet.next()) 
+                        {
+                            return resultSet.getInt(1);
+                        }
+                }
+            catch(SQLException sqlException)
+                {
+                    sqlException.printStackTrace();
+                }
+            finally 
+                {
+                    try 
+                        {
+                            pstat.close();
+                        }
+                    catch (Exception exception)
+                        {
+                            exception.printStackTrace();
+                        }
+                }
+            return outp;
+        }
     final static String DATABASE_URL = "jdbc:mysql://localhost/deliveryapp";
     public static void close() {
         if (connection != null) {
