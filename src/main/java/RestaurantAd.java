@@ -1,4 +1,6 @@
 import java.awt.Dimension;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -8,9 +10,9 @@ public class RestaurantAd extends JButton {
     private String name;
     private String desc;
     private ImageIcon image;
-    public RestaurantAd(String name, String desc, ImageIcon image)
+    public RestaurantAd(ResultSet results, ImageIcon image) throws SQLException
         {
-            super(name + "\n" + desc, image);
+            super(results.getString("name") + "\n" + results.getString("descript"), image);
             this.setHorizontalTextPosition(SwingConstants.RIGHT);
             this.setHorizontalAlignment(SwingConstants.LEFT);
             this.setIconTextGap(10);

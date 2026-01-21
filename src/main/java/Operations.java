@@ -148,6 +148,46 @@ public class Operations {
                 }
             return outp;
         }
+    public static ResultSet dbResults(String table, int row)
+        {
+            PreparedStatement pstat = null;
+            ResultSet resultSet = null;
+            try 
+                {
+                    pstat = connection.prepareStatement("""
+                                                            SELECT 
+                                                                name,
+                                                                descript,
+                                                                imgAddress,
+                                                                address
+                                                            FROM """
+                                                                    + table + 
+                                                                    """ 
+                                                            WHERE restaurantid LIKE WHERE restaurantid = ?""");
+                    resultSet = pstat.executeQuery();
+                    pstat.setInt(1, row);
+                    if (resultSet.next()) 
+                        {
+                            return resultSet;
+                        }
+                }
+            catch(SQLException sqlException)
+                {
+                    sqlException.printStackTrace();
+                }
+            finally 
+                {
+                    try 
+                        {
+                            pstat.close();
+                        }
+                    catch (Exception exception)
+                        {
+                            exception.printStackTrace();
+                        }
+                }
+            return resultSet;
+        }
     final static String DATABASE_URL = "jdbc:mysql://localhost/deliveryapp";
     public static void close() {
         if (connection != null) {

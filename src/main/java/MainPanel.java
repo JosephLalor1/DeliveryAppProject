@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -29,7 +30,7 @@ public class MainPanel extends JPanel
             {
                 JOptionPane.showMessageDialog (MainPanel.this, Operations.Display("orders"));
             }
-        public MainPanel()
+        public MainPanel() throws SQLException
             {
                 final String HOMEPAGE = "Home page";
                 JPanel cards = new JPanel(new CardLayout());
@@ -39,9 +40,7 @@ public class MainPanel extends JPanel
                 
                 JScrollPane card1 = new JScrollPane(card1Container);
                 card1.getVerticalScrollBar().setUnitIncrement(16);
-                ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource("/images/icons/food1.jpg"));
-                Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
-                ImageIcon food = new ImageIcon(foodScale);
+
 
                 cards.add(card1, HOMEPAGE);
                 
@@ -73,7 +72,10 @@ public class MainPanel extends JPanel
                 //displayButton.addActionListener(e -> displayBox());
                 for(int i = 0; i < numAds; i++)
                     {
-                        ads[i] = new RestaurantAd("Insert order", "hello", food);
+                        ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource(Operations.dbResults("restuarants", i).getString("imgAddress")));
+                        Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
+                        ImageIcon food = new ImageIcon(foodScale);
+                        ads[i] = new RestaurantAd(Operations.dbResults("restuarants", i), food);
                         ads[i].addActionListener(e -> insertBox());
                         card1Container.add(ads[i]);
                     }
