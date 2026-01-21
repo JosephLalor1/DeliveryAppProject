@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 public class MainPanel extends JPanel
     {
         //private JButton clearButton, displayButton;
-        private JPanel card1 = new JPanel();
+        private JPanel card1Container = new JPanel();
         private int numAds = 10;
         private RestaurantAd[] ads = new RestaurantAd[numAds];
         public static void openRestaurant()
@@ -34,14 +34,16 @@ public class MainPanel extends JPanel
                 final String HOMEPAGE = "Home page";
                 JPanel cards = new JPanel(new CardLayout());
                 
-                cards.add(card1, HOMEPAGE);
-                card1.setLayout(new GridLayout(numAds, 1));
                 
-                JScrollPane scroller = new JScrollPane(card1);
-                scroller.getVerticalScrollBar().setUnitIncrement(16);
+                card1Container.setLayout(new GridLayout(numAds, 1));
+                
+                JScrollPane card1 = new JScrollPane(card1Container);
+                card1.getVerticalScrollBar().setUnitIncrement(16);
                 ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource("/images/icons/food1.jpg"));
                 Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
                 ImageIcon food = new ImageIcon(foodScale);
+
+                cards.add(card1, HOMEPAGE);
                 
                 this.setLayout(new GridBagLayout());
                 GridBagConstraints gbc = new GridBagConstraints();
@@ -55,13 +57,14 @@ public class MainPanel extends JPanel
                 gbc.gridheight = 1;
                 gbc.fill = GridBagConstraints.BOTH;
                 this.add(menuBar, gbc);
+
                 gbc.weighty = 1.0;
                 gbc.gridx = 0;
                 gbc.gridy = 1;
                 gbc.gridwidth = 4;
                 gbc.gridheight = 9;
                 gbc.fill = GridBagConstraints.BOTH;
-                this.add(scroller, gbc);
+                this.add(cards, gbc);
                 this.setVisible(true);
                 //clearButton = new JButton("Clear orders");
                 //clearButton.addActionListener(e -> Operations.Clear("orders"));
@@ -72,7 +75,7 @@ public class MainPanel extends JPanel
                     {
                         ads[i] = new RestaurantAd("Insert order", "hello", food);
                         ads[i].addActionListener(e -> insertBox());
-                        card1.add(ads[i]);
+                        card1Container.add(ads[i]);
                     }
                 //panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
                 //panel.revalidate();
