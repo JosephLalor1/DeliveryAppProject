@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public class Operations {
+public class DBOperations {
 
     static Connection connection = null;
     public static void Connect()

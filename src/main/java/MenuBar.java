@@ -1,16 +1,26 @@
 import java.awt.GridLayout;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MenuBar extends JPanel
     {
-        public MenuBar() 
+        public MenuBar(MainPanel mainPanel) 
             {
                 JButton exitButton = new JButton("Exit");
                 exitButton.addActionListener(e -> exit());
+                JButton homeButton = new JButton("Home");
+                homeButton.addActionListener(e -> {
+                    try {
+                        mainPanel.openMainPanel();
+                    } catch (SQLException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                });
                 this.setLayout(new GridLayout(1, 4));
-                add(new JButton("Home"));
+                add(homeButton);
                 add(new JButton("My Orders"));
                 add(new JButton("My Account"));
                 add(exitButton);
@@ -18,7 +28,7 @@ public class MenuBar extends JPanel
             }
         public static void exit()
             {
-                Operations.close();
+                DBOperations.close();
                 System.exit(0);
             }
     }

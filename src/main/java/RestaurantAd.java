@@ -10,7 +10,8 @@ public class RestaurantAd extends JButton {
     private String name;
     private String desc;
     private ImageIcon image;
-    public RestaurantAd(ResultSet results, ImageIcon image) throws SQLException
+
+    public RestaurantAd(ResultSet results, ImageIcon image, int row, MainPanel mainPanel) throws SQLException
         {
             super(results.getString("name") + "\n" + results.getString("descript"), image);
             this.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -18,6 +19,14 @@ public class RestaurantAd extends JButton {
             this.setIconTextGap(10);
             this.setVisible(true);
             this.setMaximumSize(new Dimension(2000, 200));
+            this.addActionListener(e -> {
+                try {
+                    mainPanel.openRestaurantPanel(row);
+                } catch (SQLException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            });
         }
 
     public ImageIcon getImage() {

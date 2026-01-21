@@ -22,7 +22,7 @@ public class StartFrame
 
                 Timer timer = new Timer(1000, e -> {
                     starter.dispose();
-                    Operations.Connect();
+                    DBOperations.Connect();
                     try {
                         new MainFrame();
                     } catch (SQLException e1) {
