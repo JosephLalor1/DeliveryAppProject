@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,7 +23,12 @@ public class StartFrame
                 Timer timer = new Timer(1000, e -> {
                     starter.dispose();
                     Operations.Connect();
-                    new MainFrame();
+                    try {
+                        new MainFrame();
+                    } catch (SQLException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 });
                 timer.setRepeats(false);
                 timer.start();

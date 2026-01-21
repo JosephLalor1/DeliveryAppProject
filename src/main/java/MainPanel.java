@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -17,10 +18,6 @@ public class MainPanel extends JPanel
         private JPanel card1Container = new JPanel();
         private int numAds = Operations.count("restaurants");
         private RestaurantAd[] ads = new RestaurantAd[numAds];
-        public static void openRestaurant()
-            {
-
-            }
         public static void insertBox()
             {
                 String order = JOptionPane.showInputDialog("Enter new order for table: ");
@@ -70,14 +67,16 @@ public class MainPanel extends JPanel
                 
                 //displayButton = new JButton("Display orders");
                 //displayButton.addActionListener(e -> displayBox());
-                for(int i = 0; i < numAds; i++)
+                for(int i = 1; i <= numAds; i++)
                     {
-                        ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource(Operations.dbResults("restuarants", i).getString("imgAddress")));
+                        ResultSet rs = Operations.dbResults("restaurants", i);
+                        String imageAddress = rs.getString("imgAddress");
+                        ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource(imageAddress));
                         Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
                         ImageIcon food = new ImageIcon(foodScale);
-                        ads[i] = new RestaurantAd(Operations.dbResults("restuarants", i), food);
-                        ads[i].addActionListener(e -> insertBox());
-                        card1Container.add(ads[i]);
+                        ads[i - 1] = new RestaurantAd(rs, food);
+                        ads[i - 1].addActionListener(e -> insertBox());
+                        card1Container.add(ads[i - 1]);
                     }
                 //panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
                 //panel.revalidate();

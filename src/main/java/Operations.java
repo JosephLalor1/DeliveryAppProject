@@ -154,18 +154,8 @@ public class Operations {
             ResultSet resultSet = null;
             try 
                 {
-                    pstat = connection.prepareStatement("""
-                                                            SELECT 
-                                                                name,
-                                                                descript,
-                                                                imgAddress,
-                                                                address
-                                                            FROM """
-                                                                    + table + 
-                                                                    """ 
-                                                            WHERE restaurantid LIKE WHERE restaurantid = ?""");
+                    pstat = connection.prepareStatement("SELECT name, descript, imgAddress, address FROM " + table + " WHERE restaurantid = " + row);
                     resultSet = pstat.executeQuery();
-                    pstat.setInt(1, row);
                     if (resultSet.next()) 
                         {
                             return resultSet;
@@ -175,17 +165,7 @@ public class Operations {
                 {
                     sqlException.printStackTrace();
                 }
-            finally 
-                {
-                    try 
-                        {
-                            pstat.close();
-                        }
-                    catch (Exception exception)
-                        {
-                            exception.printStackTrace();
-                        }
-                }
+
             return resultSet;
         }
     final static String DATABASE_URL = "jdbc:mysql://localhost/deliveryapp";
