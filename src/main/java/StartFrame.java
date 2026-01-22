@@ -23,12 +23,14 @@ public class StartFrame
                 Timer timer = new Timer(1000, e -> {
                     starter.dispose();
                     DBOperations.Connect();
-                    try {
-                        new MainFrame();
-                    } catch (SQLException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+                    try 
+                        {
+                            new MainFrame();
+                        } 
+                    catch (SQLException e1) 
+                        {
+                            e1.printStackTrace();
+                        }
                 });
                 timer.setRepeats(false);
                 timer.start();

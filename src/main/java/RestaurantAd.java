@@ -11,7 +11,7 @@ public class RestaurantAd extends JButton {
     private String desc;
     private ImageIcon image;
 
-    public RestaurantAd(ResultSet results, ImageIcon image, int row, MainPanel mainPanel) throws SQLException
+    public RestaurantAd(ResultSet results, ImageIcon image, MainPanel mainPanel) throws SQLException
         {
             super(results.getString("name") + "\n" + results.getString("descript"), image);
             this.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -21,7 +21,7 @@ public class RestaurantAd extends JButton {
             this.setMaximumSize(new Dimension(2000, 200));
             this.addActionListener(e -> {
                 try {
-                    mainPanel.openRestaurantPanel(row);
+                    mainPanel.openRestaurantPanel(results.getString("name"));
                 } catch (SQLException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();

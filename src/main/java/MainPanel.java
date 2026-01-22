@@ -15,20 +15,20 @@ import javax.swing.JScrollPane;
 public class MainPanel extends JPanel
     {
         private final String HOMEPAGE = "Home page";
-        private final String RESTADPANEL = "Restaurant Ad Panel";
-        private JPanel cards = new JPanel(new CardLayout());
+        private CardLayout cl = new CardLayout();
+        private JPanel cards = new JPanel(cl);
         private JPanel card1Container = new JPanel();
         private JScrollPane card1 = new JScrollPane(card1Container);
         private int numAds = DBOperations.count("restaurants");
         private RestaurantAd[] ads = new RestaurantAd[numAds];
 
-        public void openMainPanel() throws SQLException
+        public void openHomePanel() throws SQLException
             {
-                cards.add(card1, HOMEPAGE);
+                cl.show(cards, HOMEPAGE);
             }
-        public void openRestaurantPanel(int row) throws SQLException
+        public void openRestaurantPanel(String name) throws SQLException
             {
-                cards.add(new RestaurantPanel(row), RESTADPANEL);
+                cl.show(cards, name);
             }
 
         public void displayBox()
@@ -72,8 +72,9 @@ public class MainPanel extends JPanel
                         ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource(imageAddress));
                         Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
                         ImageIcon food = new ImageIcon(foodScale);
-                        ads[i - 1] = new RestaurantAd(rs, food, i, this);
+                        ads[i - 1] = new RestaurantAd(rs, food, this);
                         card1Container.add(ads[i - 1]);
+                        cards.add(new RestaurantPanel(i), rs.getString("name"));
                     }
 
             }

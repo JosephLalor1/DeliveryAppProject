@@ -12,12 +12,14 @@ public class MenuBar extends JPanel
                 exitButton.addActionListener(e -> exit());
                 JButton homeButton = new JButton("Home");
                 homeButton.addActionListener(e -> {
-                    try {
-                        mainPanel.openMainPanel();
-                    } catch (SQLException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+                    try 
+                        {
+                            mainPanel.openHomePanel();
+                        } 
+                    catch (SQLException e1) 
+                        {
+                            e1.printStackTrace();
+                        }
                 });
                 this.setLayout(new GridLayout(1, 4));
                 add(homeButton);
