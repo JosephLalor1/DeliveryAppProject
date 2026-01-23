@@ -180,6 +180,26 @@ public class DBOperations {
                 }
             return outp;
         }
+    public static ResultSet dbResults(String table)
+        {
+            PreparedStatement pstat = null;
+            ResultSet resultSet = null;
+            try 
+                {
+                    pstat = connection.prepareStatement("SELECT * FROM " + table);
+                    resultSet = pstat.executeQuery();
+                    if (resultSet.next()) 
+                        {
+                            return resultSet;
+                        }
+                }
+            catch(SQLException sqlException)
+                {
+                    sqlException.printStackTrace();
+                }
+
+            return resultSet;
+        }
     public static ResultSet dbResults(String table, int row)
         {
             PreparedStatement pstat = null;

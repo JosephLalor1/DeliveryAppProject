@@ -64,14 +64,14 @@ public class MainPanel extends JPanel
                 gbc.fill = GridBagConstraints.BOTH;
                 this.add(cards, gbc);
                 this.setVisible(true);
-
-                for(int i = 1; i <= numAds; i++)
+                ResultSet rs = DBOperations.dbResults("restaurants");
+                int row = 0;
+                do
                     {
-                        ResultSet rs = DBOperations.dbResults("restaurants", i);
-                        ads[i - 1] = new RestaurantAd(rs, this);
-                        card1Container.add(ads[i - 1]);
-                        cards.add(new RestaurantPanel(i), rs.getString("name"));
+                        row = rs.getInt("restaurantid");
+                        card1Container.add(new RestaurantAd(row, this));
+                        cards.add(new RestaurantPanel(rs.getInt("restaurantid")), rs.getString("name"));
                     }
-
+                while(rs.next());
             }
     }

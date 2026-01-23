@@ -12,9 +12,9 @@ public class RestaurantAd extends JButton {
     private String desc;
     private ImageIcon image;
 
-    public RestaurantAd(ResultSet results, MainPanel mainPanel) throws SQLException
+    public RestaurantAd(int row, MainPanel mainPanel) throws SQLException
         {
-            super(results.getString("name") + "\n" + results.getString("descript"));
+            ResultSet results = DBOperations.dbResults("restaurants", row);
             String imageAddress = results.getString("imgAddress");
             ImageIcon foodLoad = new ImageIcon (RestaurantAd.class.getResource(imageAddress));
             Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
@@ -29,7 +29,6 @@ public class RestaurantAd extends JButton {
                 try {
                     mainPanel.openRestaurantPanel(results.getString("name"));
                 } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             });

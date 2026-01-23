@@ -19,8 +19,6 @@ public class RestaurantPanel extends JPanel
         public RestaurantPanel(int row) throws SQLException
             {
                 ResultSet rstResults = DBOperations.dbResults("restaurants", row);
-                int numFoods = DBOperations.countFood(row);
-                FoodAd[] foodAds = new FoodAd[numFoods];
                 String imageAddress = rstResults.getString("imgAddress");
                 ImageIcon foodLoad = new ImageIcon (RestaurantAd.class.getResource(imageAddress));
                 Image foodScale = foodLoad.getImage().getScaledInstance(250, 125, Image.SCALE_DEFAULT);
@@ -72,12 +70,11 @@ public class RestaurantPanel extends JPanel
                 this.add(scrollFood, gbc);
 
                 this.setVisible(true);
-
-                for(int i = 1; i <= numFoods; i++)
+                ResultSet foodResults = DBOperations.dbResults("menuItems", row);
+                do
                     {
-                        ResultSet foodResults = DBOperations.dbResults("menuItems", i);
-                        foodAds[i - 1] = new FoodAd(foodResults);
-                        scrollContainer.add(foodAds[i - 1]);
+                        scrollContainer.add(new FoodAd(foodResults));
                     }
+                while(foodResults.next());
             }
     }
