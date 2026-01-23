@@ -20,6 +20,8 @@ public class RestaurantAd extends JButton {
             Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
             ImageIcon food = new ImageIcon(foodScale);
             this.setIcon(food);
+
+            this.setText(results.getString("name") + results.getString("descript"));
             this.setHorizontalTextPosition(SwingConstants.RIGHT);
             this.setHorizontalAlignment(SwingConstants.LEFT);
             this.setIconTextGap(10);
