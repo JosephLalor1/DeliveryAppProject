@@ -148,13 +148,45 @@ public class DBOperations {
                 }
             return outp;
         }
+
+    public static int countFood(int restaurantid)
+        {
+            int outp = 0;
+            PreparedStatement pstat = null;
+            ResultSet resultSet = null;
+            try 
+                {
+                    pstat = connection.prepareStatement("SELECT COUNT(restaurantid = " + restaurantid + ") FROM menuItems");
+                    resultSet = pstat.executeQuery();
+                    if (resultSet.next()) 
+                        {
+                            return resultSet.getInt(1);
+                        }
+                }
+            catch(SQLException sqlException)
+                {
+                    sqlException.printStackTrace();
+                }
+            finally 
+                {
+                    try 
+                        {
+                            pstat.close();
+                        }
+                    catch (Exception exception)
+                        {
+                            exception.printStackTrace();
+                        }
+                }
+            return outp;
+        }
     public static ResultSet dbResults(String table, int row)
         {
             PreparedStatement pstat = null;
             ResultSet resultSet = null;
             try 
                 {
-                    pstat = connection.prepareStatement("SELECT name, descript, imgAddress, address FROM " + table + " WHERE restaurantid = " + row);
+                    pstat = connection.prepareStatement("SELECT * FROM " + table + " WHERE restaurantid = " + row);
                     resultSet = pstat.executeQuery();
                     if (resultSet.next()) 
                         {

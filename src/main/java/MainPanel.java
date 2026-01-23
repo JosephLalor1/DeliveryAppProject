@@ -68,11 +68,7 @@ public class MainPanel extends JPanel
                 for(int i = 1; i <= numAds; i++)
                     {
                         ResultSet rs = DBOperations.dbResults("restaurants", i);
-                        String imageAddress = rs.getString("imgAddress");
-                        ImageIcon foodLoad = new ImageIcon (MainPanel.class.getResource(imageAddress));
-                        Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
-                        ImageIcon food = new ImageIcon(foodScale);
-                        ads[i - 1] = new RestaurantAd(rs, food, this);
+                        ads[i - 1] = new RestaurantAd(rs, this);
                         card1Container.add(ads[i - 1]);
                         cards.add(new RestaurantPanel(i), rs.getString("name"));
                     }

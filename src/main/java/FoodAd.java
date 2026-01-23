@@ -7,17 +7,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class RestaurantAd extends JButton {
+public class FoodAd extends JButton {
     private String name;
     private String desc;
     private ImageIcon image;
 
-    public RestaurantAd(ResultSet results, MainPanel mainPanel) throws SQLException
+    public FoodAd(ResultSet results) throws SQLException
         {
             super(results.getString("name") + "\n" + results.getString("descript"));
             String imageAddress = results.getString("imgAddress");
-            ImageIcon foodLoad = new ImageIcon (RestaurantAd.class.getResource(imageAddress));
-            Image foodScale = foodLoad.getImage().getScaledInstance(400, 200, Image.SCALE_DEFAULT);
+            ImageIcon foodLoad = new ImageIcon (FoodAd.class.getResource(imageAddress));
+            Image foodScale = foodLoad.getImage().getScaledInstance(100, 50, Image.SCALE_DEFAULT);
             ImageIcon food = new ImageIcon(foodScale);
             this.setIcon(food);
             this.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -25,14 +25,6 @@ public class RestaurantAd extends JButton {
             this.setIconTextGap(10);
             this.setVisible(true);
             this.setMaximumSize(new Dimension(2000, 200));
-            this.addActionListener(e -> {
-                try {
-                    mainPanel.openRestaurantPanel(results.getString("name"));
-                } catch (SQLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            });
         }
 
     public ImageIcon getImage() {
@@ -60,3 +52,4 @@ public class RestaurantAd extends JButton {
     }
 
 }
+
