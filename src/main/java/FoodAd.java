@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import java.awt.*;
+
 import java.awt.Color;
 
 import java.awt.GridLayout;
@@ -29,9 +31,11 @@ public class FoodAd extends JButton {
 
             JLabel name = new JLabel(results.getString("name"), SwingConstants.CENTER);
             name.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+            
 
             JLabel desc = new JLabel(results.getString("descript"), SwingConstants.CENTER);
             desc.setAlignmentY(SwingConstants.TOP);
+            
 
             this.add(name);
             this.add(desc);
@@ -42,9 +46,30 @@ public class FoodAd extends JButton {
             this.setVisible(true);
             this.setMaximumSize(new Dimension(2000, 200));
 
-            this.addActionListener(e ->  {           
-                    this.setForeground(Color.RED);
-                    this.setOpaque(true);
+            
+            this.addActionListener(new ActionListener() {
+                int i = 0;
+                if(i == 0)
+                    {
+                        this.setOpaque(true);         
+                        this.setForeground(Color.RED);
+                        name.setOpaque(true);
+                        name.setBackground(Color.RED);
+                        desc.setOpaque(true);
+                        desc.setBackground(Color.RED);
+                        i = (i + 1) % 2;
+                    }
+                else
+                    {
+                        this.setOpaque(false);         
+                        this.setForeground(Color.WHITE);
+                        name.setOpaque(false);
+                        name.setBackground(Color.WHITE);
+                        desc.setOpaque(false);
+                        desc.setBackground(Color.WHITE);
+                        i = (i + 1) % 2;
+                    }  
+                    
             });
         }
 

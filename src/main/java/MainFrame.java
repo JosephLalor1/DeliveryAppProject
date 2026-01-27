@@ -1,14 +1,7 @@
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.BorderLayout;
 
-import javax.swing.ImageIcon;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 
 import java.sql.SQLException;
 

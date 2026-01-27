@@ -2,11 +2,11 @@ import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
+
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -20,7 +20,6 @@ public class MainPanel extends JPanel
         private JPanel card1Container = new JPanel();
         private JScrollPane card1 = new JScrollPane(card1Container);
         private int numAds = DBOperations.count("restaurants");
-        private RestaurantAd[] ads = new RestaurantAd[numAds];
 
         public void openHomePanel() throws SQLException
             {
