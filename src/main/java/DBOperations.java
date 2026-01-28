@@ -11,6 +11,10 @@ public class DBOperations {
     static Connection connection = null;
     public static void Connect()
         {
+            Dotenv dotenv = Dotenv.load();
+            final String DATABASE_URL = dotenv.get("DATABASE_URL");
+            final String DATABASE_USERNAME = dotenv.get("DATABASE_USER");
+            final String DATABASE_PASSWORD = dotenv.get("DATABASE_PASSWORD");
             try 
                 {
                     connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
@@ -221,9 +225,7 @@ public class DBOperations {
 
             return resultSet;
         }
-    final static String DATABASE_URL = clean(dotenv.get("DATABASE_URL"));
-    final static String DATABASE_USERNAME = clean(dotenv.get("DATABASE_USERNAME"));
-    final static String DATABASE_PASSWORD = clean(dotenv.get("DATABASE_PASSWORD"));
+
     public static void close() {
         if (connection != null) {
             try {
