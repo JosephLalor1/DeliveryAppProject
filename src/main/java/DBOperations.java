@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class DBOperations {
 
@@ -12,7 +13,7 @@ public class DBOperations {
         {
             try 
                 {
-                    connection = DriverManager.getConnection(DATABASE_URL, "root", "root");
+                    connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
                 }
             catch(SQLException sqlException)
                 {
@@ -220,7 +221,9 @@ public class DBOperations {
 
             return resultSet;
         }
-    final static String DATABASE_URL = "jdbc:mysql://localhost/deliveryapp";
+    final static String DATABASE_URL = clean(dotenv.get("DATABASE_URL"));
+    final static String DATABASE_USERNAME = clean(dotenv.get("DATABASE_USERNAME"));
+    final static String DATABASE_PASSWORD = clean(dotenv.get("DATABASE_PASSWORD"));
     public static void close() {
         if (connection != null) {
             try {

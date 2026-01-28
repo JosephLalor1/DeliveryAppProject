@@ -35,29 +35,4 @@ public class RestaurantAd extends JButton {
                 }
             });
         }
-
-    public ImageIcon getImage() {
-        return image;
-    }
-
-    public void setImage(ImageIcon image) {
-        this.image = image;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }
