@@ -20,6 +20,10 @@ public class MainPanel extends JPanel
         private JPanel card1Container = new JPanel();
         private JScrollPane card1 = new JScrollPane(card1Container);
         private int numAds = DBOperations.count("restaurants");
+        private GridBagConstraints gbc = new GridBagConstraints();
+        private MenuBar menuBar;
+        private ResultSet rs = DBOperations.dbResults("restaurants");
+        private int row = 0;
 
         public void openHomePanel() throws SQLException
             {
@@ -43,9 +47,8 @@ public class MainPanel extends JPanel
                 cards.add(card1, HOMEPAGE);
                 
                 this.setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
 
-                MenuBar menuBar = new MenuBar(this);
+                menuBar = new MenuBar(this);
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weightx = 1;
@@ -63,8 +66,7 @@ public class MainPanel extends JPanel
                 gbc.fill = GridBagConstraints.BOTH;
                 this.add(cards, gbc);
                 this.setVisible(true);
-                ResultSet rs = DBOperations.dbResults("restaurants");
-                int row = 0;
+                
                 do
                     {
                         row = rs.getInt("restaurantid");

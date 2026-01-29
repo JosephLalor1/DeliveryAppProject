@@ -6,11 +6,11 @@ import javax.swing.JPanel;
 
 public class MenuBar extends JPanel
     {
+        private JButton exitButton = new JButton("Exit");
+        private JButton homeButton = new JButton("Home");
         public MenuBar(MainPanel mainPanel) 
             {
-                JButton exitButton = new JButton("Exit");
                 exitButton.addActionListener(e -> exit());
-                JButton homeButton = new JButton("Home");
                 homeButton.addActionListener(e -> {
                     try 
                         {

@@ -17,20 +17,31 @@ public class RestaurantPanel extends JPanel
     {
         private JPanel scrollContainer = new JPanel();
         private JScrollPane scrollFood = new JScrollPane(scrollContainer);
+        private ResultSet rstResults;
+        private String imgAddress;
+        private ImageIcon foodLoad;
+        private Image foodScale;
+        private ImageIcon food;
+        private JLabel imgLabel;
+        private JLabel name;
+        private JLabel desc;
+        private GridBagConstraints gbc = new GridBagConstraints();
+        private ResultSet foodResults;
+
         public RestaurantPanel(int row) throws SQLException
             {
-                ResultSet rstResults = DBOperations.dbResults("restaurants", row);
+                rstResults = DBOperations.dbResults("restaurants", row);
 
-                String imgAddress = rstResults.getString("imgAddress");
-                ImageIcon foodLoad = new ImageIcon (RestaurantAd.class.getResource(imgAddress));
-                Image foodScale = foodLoad.getImage().getScaledInstance(250, 125, Image.SCALE_DEFAULT);
-                ImageIcon food = new ImageIcon(foodScale);
-                JLabel imgLabel = new JLabel(food);
+                imgAddress = rstResults.getString("imgAddress");
+                foodLoad = new ImageIcon (RestaurantAd.class.getResource(imgAddress));
+                foodScale = foodLoad.getImage().getScaledInstance(250, 125, Image.SCALE_DEFAULT);
+                food = new ImageIcon(foodScale);
+                imgLabel = new JLabel(food);
 
-                JLabel name = new JLabel(rstResults.getString("name"), SwingConstants.CENTER);
+                name = new JLabel(rstResults.getString("name"), SwingConstants.CENTER);
                 name.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 
-                JLabel desc = new JLabel(rstResults.getString("descript"), SwingConstants.CENTER);
+                desc = new JLabel(rstResults.getString("descript"), SwingConstants.CENTER);
                 desc.setAlignmentY(SwingConstants.TOP);
                 
                 scrollContainer.setLayout(new GridLayout(7, 1));                               
@@ -38,7 +49,7 @@ public class RestaurantPanel extends JPanel
                 
 
                 this.setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
+                
 
                 //image section
                 gbc.gridx = 0;
@@ -81,7 +92,7 @@ public class RestaurantPanel extends JPanel
                 this.add(scrollFood, gbc);
 
                 this.setVisible(true);
-                ResultSet foodResults = DBOperations.dbResults("menuItems", row);
+                foodResults = DBOperations.dbResults("menuItems", row);
                 do
                     {
                         scrollContainer.add(new FoodAd(foodResults));

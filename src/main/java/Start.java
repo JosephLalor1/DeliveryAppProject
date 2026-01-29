@@ -2,6 +2,6 @@ public class Start {
     public static void main(String[] args)
         {
             Vibes.setFeel();
-            StartFrame.startFrame();
+            new StartFrame();
         }
 }
