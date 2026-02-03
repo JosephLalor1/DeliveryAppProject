@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,6 +28,10 @@ public class RestaurantPanel extends JPanel
         private JLabel desc;
         private GridBagConstraints gbc = new GridBagConstraints();
         private ResultSet foodResults;
+        private JButton checkoutButton;
+        private int[] orderSelect;
+        private int selectArraySize = 0;
+        private int numFoods = 0;
 
         public RestaurantPanel(int row) throws SQLException
             {
@@ -47,6 +52,7 @@ public class RestaurantPanel extends JPanel
                 scrollContainer.setLayout(new GridLayout(7, 1));                               
                 scrollFood.getVerticalScrollBar().setUnitIncrement(16);
                 
+                checkoutButton = new JButton("Proceed to checkout (" + numFoods + ")");
 
                 this.setLayout(new GridBagLayout());
                 
@@ -93,10 +99,52 @@ public class RestaurantPanel extends JPanel
 
                 this.setVisible(true);
                 foodResults = DBOperations.dbResults("menuItems", row);
+
                 do
                     {
-                        scrollContainer.add(new FoodAd(foodResults));
+                        scrollContainer.add(new FoodAd(foodResults, this));
+                        selectArraySize++;
                     }
                 while(foodResults.next());
+
+                orderSelect = new int[selectArraySize];
+
+                scrollContainer.add(checkoutButton);
+            }
+        
+        public void addToSelect(int menuId)
+            {
+                int i = 0;
+
+                while (menuId < orderSelect[i])
+                    {
+                        i++;
+                    }
+
+                for (int j = numFoods - 1; j > i; j--)
+                    {
+                        orderSelect[j] = orderSelect[j - 1];
+                    }
+
+                orderSelect[i] = menuId;
+                numFoods++;
+                checkoutButton.setText("Proceed to checkout (" + numFoods + ")");
+            }
+        public void deleteFromSelect(int menuId)
+            {
+                int i = 0;
+                
+                while (menuId < orderSelect[i])
+                    {
+                        i++;
+                    }
+
+                for (int j = i; j < numFoods - 1; j++)
+                    {
+                        orderSelect[j] = orderSelect[j + 1];
+                    }
+                
+                numFoods--;
+                checkoutButton.setText("Proceed to checkout (" + numFoods + ")");
             }
     }

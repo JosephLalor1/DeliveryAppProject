@@ -20,14 +20,19 @@ public class FoodAd extends JButton implements ActionListener {
     private String imageAddress;
     private ImageIcon foodLoad;
     private int numClicks = 0;
+    private int id = 0;
+    private RestaurantPanel superPanel;
 
-    public FoodAd(ResultSet results) throws SQLException
+    public FoodAd(ResultSet results, RestaurantPanel panel) throws SQLException
         {
             this.setLayout(new GridLayout(1, 4));
             imageAddress = results.getString("imgAddress");
             foodLoad = new ImageIcon (FoodAd.class.getResource(imageAddress));
             foodScale = foodLoad.getImage().getScaledInstance(100, 50, Image.SCALE_DEFAULT);
             food = new ImageIcon(foodScale);
+
+            id = results.getInt("menuid");
+            superPanel = panel;
 
             name = new JLabel(results.getString("name"), SwingConstants.CENTER);
             name.setFont(new Font("Times New Roman", Font.PLAIN, 20));
@@ -52,11 +57,13 @@ public class FoodAd extends JButton implements ActionListener {
                 {
                     this.setBackground(Color.RED);
                     numClicks = (numClicks + 1) % 2;
+                    superPanel.addToSelect(id);
                 }
             else
                 {
                     this.setBackground(Color.WHITE);
                     numClicks = (numClicks + 1) % 2;
+                    superPanel.deleteFromSelect(id);
                 }
         }
 
