@@ -1,20 +1,20 @@
+import java.awt.Color;
 import java.awt.Dimension;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicButtonUI;
-
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Font;
-import javax.swing.BorderFactory;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 public class FoodAd extends JButton implements ActionListener {
     private JLabel name;

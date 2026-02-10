@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class DBOperations {
@@ -94,15 +95,18 @@ public class DBOperations {
                 }
             return outp;
         }
-    public static void Insert(String table, String obj)
+    public static void InsertOrder(int menuid, int clientid, int ddid, Boolean delivered)
         {
 
             PreparedStatement pstat = null;
             int i = 0;
             try 
                 {
-                    pstat = connection.prepareStatement("INSERT INTO " + table + " (name) VALUES (?)");
-                    pstat.setString (1, obj );
+                    pstat = connection.prepareStatement("INSERT INTO orders (menuid, clientid, ddid, delivered) VALUES (?, ?, ?, ?)");
+                    pstat.setInt(1, menuid);
+                    pstat.setInt (2, clientid);
+                    pstat.setInt(3, ddid);
+                    pstat.setBoolean (4, delivered);
                     i = pstat .executeUpdate();
                     System.out.println(i + " record successfully added to the table .");
                 }

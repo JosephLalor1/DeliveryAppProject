@@ -1,11 +1,11 @@
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -110,6 +110,8 @@ public class RestaurantPanel extends JPanel
                 orderSelect = new int[selectArraySize];
 
                 scrollContainer.add(checkoutButton);
+
+                checkoutButton.addActionListener(e -> checkout());
             }
         
         public void addToSelect(int menuId)
@@ -146,5 +148,12 @@ public class RestaurantPanel extends JPanel
                 
                 numFoods--;
                 checkoutButton.setText("Proceed to checkout (" + numFoods + ")");
+            }
+        public void checkout()
+            {
+                for (int i = 0; i < numFoods - 1; i++)
+                    {
+                        DBOperations.InsertOrder(orderSelect[i], 1, 1, false);
+                    }
             }
     }
