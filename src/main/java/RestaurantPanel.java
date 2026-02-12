@@ -6,10 +6,12 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -32,6 +34,7 @@ public class RestaurantPanel extends JPanel
         private int[] orderSelect;
         private int selectArraySize = 0;
         private int numFoods = 0;
+        private ArrayList<FoodAd> foodAdsList = new ArrayList<>();
 
         public RestaurantPanel(int row) throws SQLException
             {
@@ -102,7 +105,9 @@ public class RestaurantPanel extends JPanel
 
                 do
                     {
-                        scrollContainer.add(new FoodAd(foodResults, this));
+                        FoodAd adtemp = new FoodAd(foodResults, this);
+                        foodAdsList.add(adtemp);
+                        scrollContainer.add(adtemp);
                         selectArraySize++;
                     }
                 while(foodResults.next());
@@ -151,9 +156,24 @@ public class RestaurantPanel extends JPanel
             }
         public void checkout()
             {
-                for (int i = 0; i < numFoods - 1; i++)
+                int choice = new JOptionPane().showConfirmDialog(checkoutButton, "Are you sure?");
+                if(choice == JOptionPane.YES_OPTION)
                     {
-                        DBOperations.InsertOrder(orderSelect[i], 1, 1, false);
+                        for (int i = 0; i < numFoods; i++)
+                            {
+                                DBOperations.InsertOrder(orderSelect[i], 1, 1, false);
+                            }
+                        new JOptionPane().showMessageDialog(checkoutButton, "Order placed!");
+                        deselectAll();
                     }
+            }
+        public void deselectAll()
+            {
+                for(FoodAd tempAd : foodAdsList)
+                    {
+                        tempAd.deselect();
+                    }
+                numFoods = 0;
+                checkoutButton.setText("Proceed to checkout (" + numFoods + ")");
             }
     }

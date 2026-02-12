@@ -75,10 +75,15 @@ public class FoodAd extends JButton implements ActionListener {
                 }
             else
                 {
-                    this.setBackground(Color.WHITE);
+                    deselect();
                     numClicks = (numClicks + 1) % 2;
-                    superPanel.deleteFromSelect(id);
+                    
                 }
+        }
+    public void deselect()
+        {
+            this.setBackground(Color.WHITE);
+            superPanel.deleteFromSelect(id);
         }
 
 }
