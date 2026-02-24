@@ -1,26 +1,24 @@
 import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class StartFrame 
+public class StartPanel extends JPanel 
     {
-        private ImageIcon welcome = new ImageIcon(StartFrame.class.getResource("/images/icons/Welcome!.gif"));
-        private JFrame starter = new JFrame("Welcome!");
+        private ImageIcon welcome = new ImageIcon(StartPanel.class.getResource("/images/icons/Welcome!.gif"));
         private JLabel label = new JLabel(welcome);
         private Timer timer;
 
-        public StartFrame()
+        public StartPanel(MainFrame mainFrame)
             {
-                starter.setSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-                starter.setVisible(true);
-                starter.setLocationRelativeTo(null);
-                starter.add(label);
-                starter.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                this.setSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+                this.setVisible(true);
+                this.add(label);
 
                 timer = new Timer(1000, e -> {
-                    starter.dispose();
+                    mainFrame.remove(this);
                     DBOperations.Connect();
                     try 
                         {

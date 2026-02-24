@@ -15,6 +15,7 @@ public class MenuBar extends JPanel
                     try 
                         {
                             mainPanel.openHomePanel();
+                            RestaurantPanel.deselectAllAds();
                         } 
                     catch (SQLException e1) 
                         {

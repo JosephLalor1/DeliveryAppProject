@@ -35,6 +35,7 @@ public class RestaurantPanel extends JPanel
         private int selectArraySize = 0;
         private int numFoods = 0;
         private ArrayList<FoodAd> foodAdsList = new ArrayList<>();
+        private static ArrayList<RestaurantPanel> restPanels = new ArrayList<>();
 
         public RestaurantPanel(int row) throws SQLException
             {
@@ -117,6 +118,8 @@ public class RestaurantPanel extends JPanel
                 scrollContainer.add(checkoutButton);
 
                 checkoutButton.addActionListener(e -> checkout());
+
+                restPanels.add(this);
             }
         
         public void addToSelect(int menuId)
@@ -150,8 +153,7 @@ public class RestaurantPanel extends JPanel
                     {
                         orderSelect[j] = orderSelect[j + 1];
                     }
-                
-                numFoods--;
+                numFoods--;      
                 checkoutButton.setText("Proceed to checkout (" + numFoods + ")");
             }
         public void checkout()
@@ -175,5 +177,12 @@ public class RestaurantPanel extends JPanel
                     }
                 numFoods = 0;
                 checkoutButton.setText("Proceed to checkout (" + numFoods + ")");
+            }
+        public static void deselectAllAds()
+            {
+                for(RestaurantPanel tempPanel : restPanels)
+                    {
+                        tempPanel.deselectAll();
+                    }
             }
     }
