@@ -19,10 +19,9 @@ public class StartPanel extends JPanel
 
                 timer = new Timer(1000, e -> {
                     mainFrame.remove(this);
-                    DBOperations.Connect();
                     try 
                         {
-                            new MainFrame();
+                            mainFrame.openMainPanel();
                         } 
                     catch (SQLException e1) 
                         {
