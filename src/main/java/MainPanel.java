@@ -2,23 +2,23 @@ import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
 public class MainPanel extends JPanel
     {
         private final String HOMEPAGE = "Home page";
+        private final String ORDERSPAGE = "Orders page";
         private CardLayout cl = new CardLayout();
         private JPanel cards = new JPanel(cl);
-        private JPanel card1Container = new JPanel();
-        private JScrollPane card1 = new JScrollPane(card1Container);
+        private JPanel menuCardContainer = new JPanel();
+        private JScrollPane menuCard = new JScrollPane(menuCardContainer);
+        private OrderPanel orderPanel = new OrderPanel(); 
         private int numAds = DBOperations.count("restaurants");
         private GridBagConstraints gbc = new GridBagConstraints();
         private MenuBar menuBar;
@@ -29,6 +29,10 @@ public class MainPanel extends JPanel
             {
                 cl.show(cards, HOMEPAGE);
             }
+        public void openOrderPanel() throws SQLException
+            {
+                cl.show(cards, ORDERSPAGE);
+            }        
         public void openRestaurantPanel(String name) throws SQLException
             {
                 cl.show(cards, name);
@@ -40,11 +44,12 @@ public class MainPanel extends JPanel
             }
         public MainPanel() throws SQLException
             {                                                
-                card1Container.setLayout(new GridLayout(numAds, 1));               
+                menuCardContainer.setLayout(new GridLayout(numAds, 1));               
                 
-                card1.getVerticalScrollBar().setUnitIncrement(16);
+                menuCard.getVerticalScrollBar().setUnitIncrement(16);
 
-                cards.add(card1, HOMEPAGE);
+                cards.add(menuCard, HOMEPAGE);
+                cards.add(orderPanel, ORDERSPAGE);
                 
                 this.setLayout(new GridBagLayout());
 
@@ -70,7 +75,7 @@ public class MainPanel extends JPanel
                 do
                     {
                         row = rs.getInt("restaurantid");
-                        card1Container.add(new RestaurantAd(row, this));
+                        menuCardContainer.add(new RestaurantAd(row, this));
                         cards.add(new RestaurantPanel(rs.getInt("restaurantid")), rs.getString("name"));
                     }
                 while(rs.next());

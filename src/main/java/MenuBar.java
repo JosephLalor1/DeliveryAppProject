@@ -8,14 +8,29 @@ public class MenuBar extends JPanel
     {
         private JButton exitButton = new JButton("Exit");
         private JButton homeButton = new JButton("Home");
+        private JButton orderButton = new JButton("My Orders");
         public MenuBar(MainPanel mainPanel) 
             {
                 exitButton.addActionListener(e -> exit());
+                orderButton.addActionListener(e -> {
+                    try 
+                        {
+                            mainPanel.openOrderPanel();
+                            RestaurantPanel.deselectAllAds();
+                        } 
+                    catch (SQLException e1) 
+                        {
+                            e1.printStackTrace();
+                        }
+                });                
                 homeButton.addActionListener(e -> {
                     try 
                         {
-                            mainPanel.openHomePanel();
-                            RestaurantPanel.deselectAllAds();
+                            if (mainPanel != null)
+                                {
+                                    mainPanel.openHomePanel();
+                                    RestaurantPanel.deselectAllAds();
+                                }
                         } 
                     catch (SQLException e1) 
                         {
@@ -24,7 +39,7 @@ public class MenuBar extends JPanel
                 });
                 this.setLayout(new GridLayout(1, 4));
                 add(homeButton);
-                add(new JButton("My Orders"));
+                add(orderButton);
                 add(new JButton("My Account"));
                 add(exitButton);
 
