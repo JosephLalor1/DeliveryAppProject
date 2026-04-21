@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026 
+//Purpose: Splash welcome screen
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

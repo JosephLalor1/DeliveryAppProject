@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026 
+//Purpose: Main panel where menu and content are displayed
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

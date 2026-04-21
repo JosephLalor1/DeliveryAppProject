@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026 
+//Purpose: Food Ad button creator
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026 
+//Purpose: Creates main frame of application
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 
@@ -33,7 +33,7 @@ public class MainFrame extends JFrame
                             }
                         @Override
                         protected void done() {
-                            
+
                             try {
                                 mainPanel = get();        // retrieves result + rethrows exceptions
                                 openMainPanel();

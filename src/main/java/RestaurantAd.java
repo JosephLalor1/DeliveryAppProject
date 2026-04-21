@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026 
+//Purpose: Restaurant ad button
 import java.awt.Dimension;
 import java.awt.Image;
 import java.sql.ResultSet;

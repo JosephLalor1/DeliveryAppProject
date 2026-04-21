@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026
+//Purpose: Main menu bar for application
 import java.awt.GridLayout;
 import java.sql.SQLException;
 

@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026
+//Purpose: Sets appearance of window and defines fade to colour change for hover animation
 import java.awt.Color;
 
 import javax.swing.JComponent;

@@ -1,7 +1,7 @@
 //Created by: Joseph Lalor
 //Student Number: c00312883
-//Date: 
-//Purpose:
+//Date: 21/01/2026
+//Purpose: Handle DB access and operations
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
