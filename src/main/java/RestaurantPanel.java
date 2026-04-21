@@ -189,6 +189,7 @@ public class RestaurantPanel extends JPanel
                                         DBOperations.InsertOrder(orderSelect[i], 1, 1, false);
                                     }
                                 new JOptionPane().showMessageDialog(checkoutButton, "Order placed!");
+                                OrderPanel.tPanel.loadActiveOrder();
                                 deselectAll();
                             }
                     }

@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 public class OrderPanel extends JPanel
     {
         private GridBagConstraints gbc = new GridBagConstraints();
-        private TrackingPanel tPanel = new TrackingPanel();
+        public static TrackingPanel tPanel = new TrackingPanel();
         private JLabel trackTitle;
         private JLabel placeholder;
         public OrderPanel() throws SQLException

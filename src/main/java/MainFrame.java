@@ -23,23 +23,22 @@ public class MainFrame extends JFrame
                 this.setVisible(true);
                 this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-                new SwingWorker<Void, Void>() 
+                new SwingWorker<MainPanel, Void>() 
                     {
                         @Override
-                        protected Void doInBackground() throws Exception 
+                        protected MainPanel doInBackground() throws Exception 
                             {
                                 DBOperations.Connect();
-                                return null;
+                                return new MainPanel();   // built off the EDT
                             }
-
                         @Override
                         protected void done() {
+                            
                             try {
-                                get(); // this re-throws any exception from doInBackground()
-                                mainPanel = new MainPanel();
+                                mainPanel = get();        // retrieves result + rethrows exceptions
                                 openMainPanel();
                             } catch (Exception e) {
-                                e.printStackTrace(); // now you'll actually see what's going wrong
+                                e.printStackTrace();
                             }
                         }
                     }.execute();
