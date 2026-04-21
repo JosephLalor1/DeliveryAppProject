@@ -225,13 +225,35 @@ public class DBOperations {
                         {
                             return resultSet;
                         }
+                    return null;
                 }
             catch(SQLException sqlException)
                 {
                     sqlException.printStackTrace();
                 }
 
-            return resultSet;
+            return null;
+        }
+
+    public static Boolean checkOrder()
+        {
+            PreparedStatement pstat = null;
+            ResultSet resultSet = null;
+            try 
+                {
+                    pstat = connection.prepareStatement("SELECT 1 FROM orders WHERE delivered = 0 LIMIT 1");
+                    resultSet = pstat.executeQuery();
+                    if (resultSet.next())
+                        {
+                            return true;
+                        }
+                    return false;
+                }
+            catch(SQLException sqlException)
+                {
+                    sqlException.printStackTrace();
+                    return false;
+                }
         }
 
     public static void close() {

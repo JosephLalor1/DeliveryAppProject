@@ -5,12 +5,15 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -47,8 +50,12 @@ public class FoodAd extends JButton implements ActionListener {
 
             imageAddress = results.getString("imgAddress");
             foodLoad = new ImageIcon (FoodAd.class.getResource(imageAddress));
-            foodScale = foodLoad.getImage().getScaledInstance(100, 50, Image.SCALE_DEFAULT);
-            food = new ImageIcon(foodScale);
+            BufferedImage buffered = new BufferedImage(100, 50, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2 = buffered.createGraphics();
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g2.drawImage(foodLoad.getImage(), 0, 0, 250, 125, null);
+            g2.dispose();
+            food = new ImageIcon(buffered);
 
             id = results.getInt("menuid");
             superPanel = panel;

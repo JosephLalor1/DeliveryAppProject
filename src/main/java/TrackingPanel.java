@@ -18,23 +18,23 @@ public class TrackingPanel extends JPanel
         private int[][] edges = 
             {
                 {0, 1, 4},  // node 0 -> node 1, weight 4
-                {1, 2, 3},
-                {1, 15, 4},
-                {2, 12, 8},
-                {2, 3, 3},
-                {3, 4, 2},
-                {4, 6, 5},
-                {6, 5, 12},
-                {6, 7, 11},
-                {6, 8, 9},
-                {8, 11, 7},
-                {10, 11, 10},
-                {8, 9, 8},
-                {12, 13, 3},
-                {13, 14, 2},
-                {15, 16, 5},
-                {16, 17, 7},
-                {16, 18, 6}
+                {1, 2, 3},  //node 1
+                {1, 15, 4}, //node 2
+                {2, 12, 8}, //node 3
+                {2, 3, 3},  //node 4
+                {3, 4, 2},  //node 5
+                {4, 6, 5},  //node 6
+                {6, 5, 12}, //node 7
+                {6, 7, 11}, //node 8
+                {6, 8, 9},  //node 9
+                {8, 11, 7}, //node 10
+                {10, 11, 10},//node 11
+                {8, 9, 8},  //node 12
+                {12, 13, 3},    //node 13
+                {13, 14, 2},    //node 14
+                {15, 16, 5},    //node 15
+                {16, 17, 7},    //node 16
+                {16, 18, 6}     //node 17
             };
 
 
@@ -50,13 +50,18 @@ public class TrackingPanel extends JPanel
                 this.nodeCount = nodeCount;
                 this.nodePositions = new int[nodeCount][2];
                 
-                // Arrange nodes in a circle
-                int centerX = 300, centerY = 300, radius = 200;
-                for (int i = 0; i < nodeCount; i++) {
-                    double angle = 2 * Math.PI * i / nodeCount;
-                    nodePositions[i][0] = (int) (centerX + radius * Math.cos(angle));
-                    nodePositions[i][1] = (int) (centerY + radius * Math.sin(angle));
-                }
+                // Arrange nodes in a grid
+                int cols = (int) Math.ceil(Math.sqrt(nodeCount));
+                int rows = (int) Math.ceil((double) nodeCount / cols); 
+                int marginX = 75, marginY = 75;
+                int spacingX = 120, spacingY = 120;
+                for (int i = 0; i < nodeCount; i++)
+                    {
+                        int row = i / cols;
+                        int col = i % cols;
+                        nodePositions[i][0] = marginX + col * spacingX;
+                        nodePositions[i][1] = marginY + row * spacingY;
+                    }
             }
 
     @Override
@@ -86,7 +91,7 @@ public class TrackingPanel extends JPanel
             g2.fillOval(x, y, nodeSize, nodeSize);
 
             g2.setColor(Color.WHITE);
-            g2.drawString(String.valueOf(i), nodePositions[i][0] - 4, nodePositions[i][1] + 5);
+            g2.drawString("", nodePositions[i][0] - 4, nodePositions[i][1] + 5);
         }
     }
 }
