@@ -1,4 +1,7 @@
-
+//Created by: Joseph Lalor
+//Student Number: c00312883
+//Date: 
+//Purpose: A JPanel for list of foods of a restaurant
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

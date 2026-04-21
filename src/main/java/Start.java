@@ -1,3 +1,7 @@
+//Created by: Joseph Lalor
+//Student Number: c00312883
+//Date: 
+//Purpose: Driver for application
 import java.sql.SQLException;
 
 public class Start {

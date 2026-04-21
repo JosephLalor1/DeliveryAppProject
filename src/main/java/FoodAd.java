@@ -1,3 +1,7 @@
+//Created by: Joseph Lalor
+//Student Number: c00312883
+//Date: 
+//Purpose:
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -5,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -26,8 +32,9 @@ public class FoodAd extends JButton implements ActionListener {
     private int numClicks = 0;
     private int id = 0;
     private RestaurantPanel superPanel;
-    private JLabel foodLabel;
-
+    private JLabel foodLabel; 
+    private MouseAdapter hover;
+    private Color hoverBlue = new Color(208, 223, 247);
 
     public FoodAd(ResultSet results, RestaurantPanel panel) throws SQLException
         {
@@ -63,6 +70,19 @@ public class FoodAd extends JButton implements ActionListener {
             this.setVisible(true);
             this.setMaximumSize(new Dimension(2000, 200));
             this.addActionListener(this);
+            hover = new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent evt) 
+                    {
+                        if (numClicks == 0) Vibes.fadeTo(FoodAd.this, Color.WHITE, hoverBlue);
+                    }
+                @Override
+                public void mouseExited(MouseEvent evt) 
+                    {
+                        if (numClicks == 0) Vibes.fadeTo(FoodAd.this, hoverBlue, Color.WHITE);
+                    }
+            };
+            this.addMouseListener(hover);
         }
     //making the button select/unselect
     public void actionPerformed(ActionEvent e) 
@@ -84,6 +104,5 @@ public class FoodAd extends JButton implements ActionListener {
             superPanel.deleteFromSelect(id);
             numClicks = 0;
         }
-
 }
 

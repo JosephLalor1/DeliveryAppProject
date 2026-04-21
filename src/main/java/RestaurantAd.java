@@ -1,3 +1,7 @@
+//Created by: Joseph Lalor
+//Student Number: c00312883
+//Date: 
+//Purpose:
 import java.awt.Dimension;
 import java.awt.Image;
 import java.sql.ResultSet;

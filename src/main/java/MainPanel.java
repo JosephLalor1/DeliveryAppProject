@@ -1,3 +1,7 @@
+//Created by: Joseph Lalor
+//Student Number: c00312883
+//Date: 
+//Purpose:
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
