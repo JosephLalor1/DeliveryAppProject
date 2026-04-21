@@ -44,7 +44,6 @@ public class MenuBar extends JPanel
                 this.setLayout(new GridLayout(1, 4));
                 add(homeButton);
                 add(orderButton);
-                add(new JButton("My Account"));
                 add(exitButton);
 
             }

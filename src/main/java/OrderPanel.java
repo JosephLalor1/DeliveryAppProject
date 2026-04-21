@@ -15,16 +15,14 @@ public class OrderPanel extends JPanel
     {
         private GridBagConstraints gbc = new GridBagConstraints();
         public static TrackingPanel tPanel = new TrackingPanel();
+        public static OrderDetailsPanel detailsPanel = new OrderDetailsPanel();
         private JLabel trackTitle;
-        private JLabel placeholder;
         public OrderPanel() throws SQLException
             {
                 this.setLayout(new GridBagLayout());
 
                 trackTitle = new JLabel("Track your order", SwingConstants.CENTER);
                 trackTitle.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-
-                placeholder = new JLabel("Placeholder", SwingConstants.CENTER);
 
                 //left order details
                 gbc.gridx = 0;
@@ -34,7 +32,7 @@ public class OrderPanel extends JPanel
                 gbc.gridwidth = 1;
                 gbc.gridheight = 1;
                 gbc.fill = GridBagConstraints.BOTH;
-                this.add(placeholder, gbc);
+                this.add(detailsPanel, gbc);
 
                 //tracking title
                 gbc.gridx = 1;
